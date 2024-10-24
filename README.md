@@ -24,7 +24,7 @@ Our mission is to make a meaningful impact by fostering academic excellence and 
 
 ## Contact
 
-For more information, visit our website or contact us at [support@okoasem.com](mailto:support@okoasem.com).
+For more information, visit our website or contact us at [jamesmungai6303@gmail.com](mailto:jamesmungai6303@gmail.com).
 
 
 ## Running the Project
