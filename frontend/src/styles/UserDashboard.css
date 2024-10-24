@@ -1,0 +1,94 @@
+.dashboard-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .welcome-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .user-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+    background-color: #f0f0f0;
+  }
+
+
+  .upload-section {
+    width: 100%;            /* Fills the entire width of the page */
+    background-color: white; /* White background */
+    padding: 20px;           /* Adds spacing inside the div */
+    box-sizing: border-box;  /* Ensures padding doesn’t increase width */
+    display: flex;           /* Align elements horizontally */
+    gap: 10px;               /* Spacing between input and button */
+    align-items: center;     /* Align items vertically centered */
+    justify-content: center; /* Center content horizontally */
+    margin: 0 auto;          /* Centers the div on the page */
+  }
+  
+  
+  button {
+    padding: 5px 10px;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+  
+  .files-section h2 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .file-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .file-list li {
+    margin-bottom: 10px;
+  }
+  
+  .file-list a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .file-list a:hover {
+    text-decoration: underline;
+  }
+  /* Table */
+  .file-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .file-table th, .file-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .file-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .file-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .file-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .file-table th, .file-table td a {
+    color: #333;
+    text-decoration: none;
+  }
+  
