@@ -42,6 +42,8 @@ const userSchema = new mongoose.Schema({
 const fileSchema = new mongoose.Schema({
   filename: String,
   originalName: String,
+  year: String,    
+  course: String,
   uploadedBy: String, // 'admin'
   dateUploaded: { type: Date, default: Date.now },
 });
@@ -203,11 +205,13 @@ app.get('/api/dashboard', (req, res) => {
 
   // Route: Admin uploads files
   app.post('/api/upload', upload.single('file'), async (req, res) => {
-    const { fileName } = req.body;  // Extract fileName from the request body
+    const { fileName,  year, course } = req.body;  // Extract fileName from the request body
   
     try {
       const newFile = new File({
         filename: req.file.filename,        // Saved file's name on the server
+        year: req.file.year,
+        course: req.file.course,
         originalName: fileName || req.file.originalname,  // Use provided file name or fallback to original name
         uploadedBy: 'admin',
       });

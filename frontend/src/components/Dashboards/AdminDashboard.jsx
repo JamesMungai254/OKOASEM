@@ -4,37 +4,36 @@ import axios from 'axios';
 function AdminDashboard() {
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState('');
+  const [year, setYear] = useState('');
+  const [course, setCourse] = useState('');
   const [message, setMessage] = useState('');
   const [uploadedFiles, setUploadedFiles] = useState([]);
-  const [contactMessages, setContactMessages] = useState([]);
 
-  // Fetch the uploaded files and contact messages when the component mounts
   useEffect(() => {
-    const fetchFilesAndMessages = async () => {
+    const fetchFiles = async () => {
       try {
-        // Fetch uploaded files
-        const fileResponse = await axios.get('http://localhost:5000/api/files');
-        setUploadedFiles(fileResponse.data);
-
-        // Fetch contact messages
-        const messageResponse = await axios.get('http://localhost:5000/api/contact-messages');
-        setContactMessages(messageResponse.data);
+        const { data } = await axios.get('http://localhost:5000/api/files');
+        setUploadedFiles(data);
       } catch (err) {
-        console.error('Error fetching data:', err);
+        console.error('Error fetching files:', err);
       }
     };
 
-    fetchFilesAndMessages();
+    fetchFiles();
   }, []);
 
   const handleFileChange = (e) => setFile(e.target.files[0]);
   const handleFileNameChange = (e) => setFileName(e.target.value);
+  const handleYearChange = (e) => setYear(e.target.value);
+  const handleCourseChange = (e) => setCourse(e.target.value);
 
   const handleUpload = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
-    formData.append('fileName', fileName);  // Append the file name
+    formData.append('fileName', fileName);
+    formData.append('year', year);
+    formData.append('course', course);
 
     try {
       const { data } = await axios.post('http://localhost:5000/api/upload', formData);
@@ -44,6 +43,7 @@ function AdminDashboard() {
       const fileResponse = await axios.get('http://localhost:5000/api/files');
       setUploadedFiles(fileResponse.data);
     } catch (err) {
+      console.error('File upload failed:', err);
       setMessage('File upload failed.');
     }
   };
@@ -62,6 +62,20 @@ function AdminDashboard() {
           required 
         />
         <input 
+          type="text" 
+          value={year} 
+          onChange={handleYearChange} 
+          placeholder="Enter year (e.g., 1, 2, 3, 4)" 
+          required 
+        />
+        <input 
+          type="text" 
+          value={course} 
+          onChange={handleCourseChange} 
+          placeholder="Enter course name" 
+          required 
+        />
+        <input 
           type="file" 
           onChange={handleFileChange} 
           required 
@@ -71,12 +85,14 @@ function AdminDashboard() {
       <p>{message}</p>
 
       {/* Uploaded Files Table */}
-      <h2>Uploaded PDFs</h2>
+      <h2>Uploaded Files</h2>
       <table border="1" cellPadding="10" cellSpacing="0">
         <thead>
           <tr>
             <th>#</th>
             <th>File Name</th>
+            <th>Year</th>
+            <th>Course</th>
             <th>Download Link</th>
           </tr>
         </thead>
@@ -85,32 +101,13 @@ function AdminDashboard() {
             <tr key={file._id}>
               <td>{index + 1}</td>
               <td>{file.originalName}</td>
+              <td>{file.year}</td>
+              <td>{file.course}</td>
               <td>
                 <a href={`http://localhost:5000/uploads/${file.filename}`} download={file.originalName}>
                   Download
                 </a>
               </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {/* Contact Messages Table */}
-      <h2>Contact Messages</h2>
-      <table border="1" cellPadding="10" cellSpacing="0">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Message</th>
-          </tr>
-        </thead>
-        <tbody>
-          {contactMessages.map((msg, index) => (
-            <tr key={msg._id}>
-              <td>{index + 1}</td>
-              <td>{msg.name}</td>
-              <td>{msg.message}</td>
             </tr>
           ))}
         </tbody>

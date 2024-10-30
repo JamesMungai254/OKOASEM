@@ -39,34 +39,33 @@ function Footer() {
             <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>
                 <MDBIcon color='secondary' icon='gem' className='me-3' />
-                Company name
+                JiTECH technologies
               </h6>
               <p>
-                Here you can use rows and columns to organize your footer content. Lorem ipsum dolor sit
-                amet, consectetur adipisicing elit.
+                We provide a platform for students to access past papers, tech events, private tutors, and meetups and workshops. This will help them to excel in their studies and careers.
               </p>
             </MDBCol>
 
             <MDBCol md='2' lg='2' xl='2' className='mx-auto mb-4'>
               <h6 className='text-uppercase fw-bold mb-4'>Products</h6>
               <p>
-                <a href='#!' className='text-reset'>
-                  Angular
+                <a href='/login' className='text-reset'>
+                  Past Papers
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  React
+                  Tech Events
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Vue
+                  Private Tutors
                 </a>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Laravel
+                  Meetups and Workshops
                 </a>
               </p>
             </MDBCol>
@@ -99,17 +98,17 @@ function Footer() {
               <h6 className='text-uppercase fw-bold mb-4'>Contact</h6>
               <p>
                 <MDBIcon color='secondary' icon='home' className='me-2' />
-                New York, NY 10012, US
+                Nairobi, NB, 10012, KE
               </p>
               <p>
                 <MDBIcon color='secondary' icon='envelope' className='me-3' />
-                info@example.com
+                jamesmungai6303@gmail.com
               </p>
               <p>
-                <MDBIcon color='secondary' icon='phone' className='me-3' /> + 01 234 567 88
+                <MDBIcon color='secondary' icon='phone' className='me-3' /> + 254791354440
               </p>
               <p>
-                <MDBIcon color='secondary' icon='print' className='me-3' /> + 01 234 567 89
+                <MDBIcon color='secondary' icon='print' className='me-3' /> + 254785898187
               </p>
             </MDBCol>
           </MDBRow>
