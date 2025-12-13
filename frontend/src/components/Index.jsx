@@ -1,4 +1,5 @@
-import React from 'react'
+import { Link } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import About from './About';
 import Contact from './Contact';
@@ -28,10 +29,10 @@ function Index() {
             Data Science
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><a className="dropdown-item" href="/login">Year 1</a></li>
-            <li><a className="dropdown-item" href="/login">Year 2</a></li>
-            <li><a className="dropdown-item" href="/login">Year 3</a></li>
-            <li><a className="dropdown-item" href="/login">Year 4</a></li>
+            <li><Link className="dropdown-item" to="/login">Year 1</Link></li>
+            <li><Link className="dropdown-item" to="/login">Year 2</Link></li>
+            <li><Link className="dropdown-item" to="/login">Year 3</Link></li>
+            <li><Link className="dropdown-item" to="/login">Year 4</Link></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" href="#faq">FAQs</a></li>
           </ul>
