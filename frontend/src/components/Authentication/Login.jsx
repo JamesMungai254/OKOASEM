@@ -15,7 +15,7 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('https://1a496bc012cb.ngrok-free.app/api/login', formData);
+      const { data } = await axios.post('http://localhost:5000/api/login', formData);
       localStorage.setItem('token', data.token);
       
       
