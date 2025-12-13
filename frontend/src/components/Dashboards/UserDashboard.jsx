@@ -4,6 +4,7 @@ import '../../styles/UserDashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
 import Footer from '../Footer';
+import { Link } from 'react-router-dom';
 
 function UserDashboard() {
   const [files, setFiles] = useState([]);
@@ -91,7 +92,7 @@ function UserDashboard() {
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link active" aria-current="page" href="#">Home</a>
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#contact">Contact</a>
