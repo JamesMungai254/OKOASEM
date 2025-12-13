@@ -1,9 +1,8 @@
-import React from 'react';
 
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Index from './components/Index';
 import About from './components/About';
-import Login from './components/Authentication/Login';
+import Login from '../components/Authentication/login';
 import Register from './components/Authentication/Register';
 import DataScience1 from './components/DataScience/DataScience1';
 import DataScience2 from './components/DataScience/DataScience2';
@@ -21,9 +20,9 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           
             <Route path="/1" element={<DataScience1 />} />
