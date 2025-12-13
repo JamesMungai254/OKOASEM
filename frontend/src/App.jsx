@@ -2,7 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Index from './components/Index';
 import About from './components/About';
-import Login from '../components/Authentication/login';
+import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
 import DataScience1 from './components/DataScience/DataScience1';
 import DataScience2 from './components/DataScience/DataScience2';
