@@ -32,7 +32,7 @@ function Login() {
          navigate('/user-dashboard');
        }
     } catch (err) {
-      alert('Login failed.');
+      alert('Login failed.',err);
     }
   };
 
