@@ -37,7 +37,7 @@ function Register() {
     }
 
     try {
-      await axios.post('https://aa6c00879500.ngrok-free.app/api/register', formData);
+      await axios.post('https://1a496bc012cb.ngrok-free.app/api/register', formData);
       alert('Registration successful!');
       navigate('/login');
     } catch (err) {

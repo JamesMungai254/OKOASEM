@@ -17,7 +17,7 @@ function UserDashboard() {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const { data } = await axios.get('https://aa6c00879500.ngrok-free.app/api/user', {
+        const { data } = await axios.get('https://1a496bc012cb.ngrok-free.app/api/user', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -26,7 +26,7 @@ function UserDashboard() {
         setUserYear(data.year);
         setUserCourse(data.course);
 
-        const filesResponse = await axios.get('https://aa6c00879500.ngrok-free.app/api/files', {
+        const filesResponse = await axios.get('https://1a496bc012cb.ngrok-free.app/api/files', {
           params: { year: data.year, course: data.course },
         });
         setFiles(filesResponse.data);
@@ -48,7 +48,7 @@ function UserDashboard() {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.post(
-        'https://aa6c00879500.ngrok-free.app/api/upload-profile-image',
+        'https://1a496bc012cb.ngrok-free.app/api/upload-profile-image',
         formData,
         {
           headers: {
@@ -58,7 +58,7 @@ function UserDashboard() {
         }
       );
 
-      setProfileImage(`https://aa6c00879500.ngrok-free.app/uploads/${data.imageUrl}`);
+      setProfileImage(`https://1a496bc012cb.ngrok-free.app/uploads/${data.imageUrl}`);
       alert('Profile picture uploaded successfully!');
     } catch (err) {
       console.error('Failed to upload profile picture.', err);
@@ -149,7 +149,7 @@ function UserDashboard() {
                         <td>{file.originalName}</td>
                         <td>
                           <a
-                            href={`https://aa6c00879500.ngrok-free.app/uploads/${file.filename}`}
+                            href={`https://1a496bc012cb.ngrok-free.app/uploads/${file.filename}`}
                             download={file.originalName} 
                           >
                             Download
