@@ -16,7 +16,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: '*', 
+  origin: 'https://okoasemfrontend.onrender.com'
 }));
 // app.use('/uploads', express.static('uploads')); // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
