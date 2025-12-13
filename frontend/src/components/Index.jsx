@@ -2,6 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import About from './About';
 import Contact from './Contact';
+import FAQ from './FAQS';
 import Footer from './Footer';
 import '../styles/index.css';
 function Index() {
@@ -11,8 +12,8 @@ function Index() {
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark " style={{opacity:'0.9'}}>
         <div className="container-fluid">
     <a className="navbar-brand" href="#">OKOASEM</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon"></span>
+    <button className="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span className="navbar-toggler-icon" style={{backgroundColor:'white'}}></span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
@@ -32,7 +33,7 @@ function Index() {
             <li><a className="dropdown-item" href="/login">Year 3</a></li>
             <li><a className="dropdown-item" href="/login">Year 4</a></li>
             <li><hr className="dropdown-divider"/></li>
-            <li><a className="dropdown-item" href="#">FAQs</a></li>
+            <li><a className="dropdown-item" href="#faq">FAQs</a></li>
           </ul>
         </li>
         <li className="nav-item">
@@ -41,20 +42,26 @@ function Index() {
       </ul>
       
     </div>
+    <span className='cssanimation typing' style={{color:'white'}} >
+      Empowering Students, Building Foundations in Learning.
+    </span>
   </div>
+  
 </nav>
 
 
-<section className="index-container">
-    <div className='Home' id='home'>
-        <h1 style={{color:'green'}}>Welcome to OKOASEM</h1>
+<section className="index-container ">
+    <div className='cssanimation hu__hu__' id='home'>
+       <h1 style={{color:'white'}}> Welcome to OKOASEM</h1>
     </div>
+    
  </section>
 
 
     </div>
     <About />
     <Contact />
+    <FAQ />
     <Footer/>
   </>
   )

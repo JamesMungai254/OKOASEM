@@ -17,7 +17,7 @@ function UserDashboard() {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const { data } = await axios.get('http://localhost:5000/api/user', {
+        const { data } = await axios.get('https://aa6c00879500.ngrok-free.app/api/user', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -26,8 +26,7 @@ function UserDashboard() {
         setUserYear(data.year);
         setUserCourse(data.course);
 
-        // Fetch files for the user’s year and course
-        const filesResponse = await axios.get('http://localhost:5000/api/files', {
+        const filesResponse = await axios.get('https://aa6c00879500.ngrok-free.app/api/files', {
           params: { year: data.year, course: data.course },
         });
         setFiles(filesResponse.data);
@@ -49,7 +48,7 @@ function UserDashboard() {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.post(
-        'http://localhost:5000/api/upload-profile-image',
+        'https://aa6c00879500.ngrok-free.app/api/upload-profile-image',
         formData,
         {
           headers: {
@@ -59,7 +58,7 @@ function UserDashboard() {
         }
       );
 
-      setProfileImage(`http://localhost:5000/uploads/${data.imageUrl}`);
+      setProfileImage(`https://aa6c00879500.ngrok-free.app/uploads/${data.imageUrl}`);
       alert('Profile picture uploaded successfully!');
     } catch (err) {
       console.error('Failed to upload profile picture.', err);
@@ -73,10 +72,17 @@ function UserDashboard() {
     navigate('/login');
   };
 
+  // Group files by year and course
+  const groupedFiles = files.reduce((acc, file) => {
+    if (!acc[file.year]) acc[file.year] = {};
+    if (!acc[file.year][file.course]) acc[file.year][file.course] = [];
+    acc[file.year][file.course].push(file);
+    return acc;
+  }, {});
+
   return (
     <>
-      {/* Navigation Bar */}
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark ">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="#">OKOASEM</a>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -105,7 +111,6 @@ function UserDashboard() {
         </div>
       </nav>
 
-      {/* User Dashboard */}
       <h2>Welcome, {userName}!</h2>
       <p>Your Course: {userCourse}</p>
       <p>Your Year: {userYear}</p>
@@ -122,36 +127,42 @@ function UserDashboard() {
       </div>
 
       <div className="files-section">
-        <h2>Available Files for {userCourse} - Year {userYear}</h2>
-        <table className="file-table">
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>File Name</th>
-              <th>Course</th>
-              <th>Year</th>
-              <th>Download</th>
-            </tr>
-          </thead>
-          <tbody>
-            {files.map((file, index) => (
-              <tr key={file._id}>
-                <td>{index + 1}</td>
-                <td>{file.originalName}</td>
-                <td>{file.course}</td>
-                <td>{file.year}</td>
-                <td>
-                  <a
-                    href={`http://localhost:5000/uploads/${file.filename}`}
-                    download={file.originalName}
-                  >
-                    Download
-                  </a>
-                </td>
-              </tr>
+        <h2>Available Files</h2>
+        {Object.entries(groupedFiles).map(([year, courses]) => (
+          <div key={year} className="year-section">
+            <h3>Year: {year}</h3>
+            {Object.entries(courses).map(([course, files]) => (
+              <div key={course} className="course-section">
+                <h4>Course: {course}</h4>
+                <table className="file-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>File Name</th>
+                      <th>Download</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {files.map((file, index) => (
+                      <tr key={file._id}>
+                        <td>{index + 1}</td>
+                        <td>{file.originalName}</td>
+                        <td>
+                          <a
+                            href={`https://aa6c00879500.ngrok-free.app/uploads/${file.filename}`}
+                            download={file.originalName} 
+                          >
+                            Download
+                          </a>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             ))}
-          </tbody>
-        </table>
+          </div>
+        ))}
       </div>
 
       <Contact />

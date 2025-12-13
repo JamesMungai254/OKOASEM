@@ -1,5 +1,7 @@
 .HomePage {
     background-image: url('../images/home.jpg');
+    background-color: rgba(0, 0, 0, 0.5);
+    background-blend-mode: darken;
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -28,4 +30,32 @@ nav{
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    
 } 
+
+div .hu__hu__ { 
+    text-align: center;
+    align-items: center;
+    animation: hu__hu__ infinite 2s ease-in-out }
+@keyframes hu__hu__ {
+    
+    to {
+        text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9, 0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, .1), 0 0 5px rgba(0, 0, 0, .1), 0 1px 3px rgba(0, 0, 0, .3), 0 3px 5px rgba(0, 0, 0, .2), 0 5px 10px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .2), 0 20px 20px rgba(0, 0, 0, .15)
+    }
+    50% { transform: translateY(30px) }
+}
+
+.typing {
+    
+    width: 473px;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid #ffffff;
+    animation: typing 2s steps(12, end), cursor .2s steps(12, end) infinite;
+}
+@keyframes typing {
+    from { width: 0 }
+}
+@keyframes cursor {
+    50% { border-color: transparent }
+}
