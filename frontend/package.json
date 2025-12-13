@@ -3,10 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://JamesMungai254.github.io/OKOASEM", // Added for gh-pages deployment
+  
+  "homepage": "https://JamesMungai254.github.io/OKOASEM",
+
   "scripts": {
-    "predeploy": "npm run build", //added for gh-pages deployment
-    "deploy": "gh-pages -d build", //added for gh-pages deployment
+
+    "predeploy": "npm run build", 
+    "deploy": "gh-pages -d dist -r https://github.com/JamesMungai254/OKOASEM.git",
+    "start": "react-scripts start",
+    
+ 
+
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
