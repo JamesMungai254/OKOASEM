@@ -37,7 +37,7 @@ function Register() {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/register', formData);
+      await axios.post('https://okoasembackend.onrender.com/api/register', formData);
       alert('Registration successful!');
       navigate('/login');
     } catch (err) {

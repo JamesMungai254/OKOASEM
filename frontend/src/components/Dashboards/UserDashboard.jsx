@@ -17,7 +17,7 @@ function UserDashboard() {
     const fetchUserData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const { data } = await axios.get('http://localhost:5000/api/user', {
+        const { data } = await axios.get('https://okoasembackend.onrender.com/api/user', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
@@ -26,7 +26,7 @@ function UserDashboard() {
         setUserYear(data.year);
         setUserCourse(data.course);
 
-        const filesResponse = await axios.get('http://localhost:5000/api/files', {
+        const filesResponse = await axios.get('https://okoasembackend.onrender.com/api/files', {
           params: { year: data.year, course: data.course },
         });
         setFiles(filesResponse.data);
@@ -48,7 +48,7 @@ function UserDashboard() {
     try {
       const token = localStorage.getItem('token');
       const { data } = await axios.post(
-        'http://localhost:5000/api/upload-profile-image',
+        'https://okoasembackend.onrender.com/api/upload-profile-image',
         formData,
         {
           headers: {
@@ -58,7 +58,7 @@ function UserDashboard() {
         }
       );
 
-      setProfileImage(`http://localhost:5000/uploads/${data.imageUrl}`);
+      setProfileImage(`https://okoasembackend.onrender.com/uploads/${data.imageUrl}`);
       alert('Profile picture uploaded successfully!');
     } catch (err) {
       console.error('Failed to upload profile picture.', err);
@@ -149,7 +149,7 @@ function UserDashboard() {
                         <td>{file.originalName}</td>
                         <td>
                           <a
-                            href={`http://localhost:5000/uploads/${file.filename}`}
+                            href={`https://okoasembackend.onrender.com/uploads/${file.filename}`}
                             download={file.originalName} 
                           >
                             Download

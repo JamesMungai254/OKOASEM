@@ -27,7 +27,7 @@ function Contact() {
     setIsSubmitting(true);
   
     try {
-      const response = await axios.post('http://localhost:5000/api/contact', formData);
+      const response = await axios.post('https://okoasembackend.onrender.com/api/contact', formData);
       console.log('Message sent successfully:', response.data);
   
       // Reset the form after successful submission

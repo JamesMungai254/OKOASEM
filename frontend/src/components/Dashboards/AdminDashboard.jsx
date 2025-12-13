@@ -13,7 +13,7 @@ function AdminDashboard() {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const { data } = await axios.get('http://localhost:5000/api/files');
+        const { data } = await axios.get('https://okoasembackend.onrender.com/api/files');
         setUploadedFiles(data);
       } catch (err) {
         console.error('Error fetching files:', err);
@@ -44,7 +44,7 @@ function AdminDashboard() {
     formData.append('course', course);
 
     try {
-      const { data } = await axios.post('http://localhost:5000/api/upload', formData, {
+      const { data } = await axios.post('https://okoasembackend.onrender.com/api/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -52,7 +52,7 @@ function AdminDashboard() {
       setMessage(data.message);
 
       // Refresh file list after successful upload
-      const fileResponse = await axios.get('http://localhost:5000/api/files');
+      const fileResponse = await axios.get('https://okoasembackend.onrender.com/api/files');
       setUploadedFiles(fileResponse.data);
     } catch (err) {
       console.error('File upload failed:', err);
@@ -116,7 +116,7 @@ function AdminDashboard() {
               <td>{file.year}</td>
               <td>{file.course}</td>
               <td>
-                <a href={`http://localhost:5000/uploads/${file.filename}`} download={file.originalName}>
+                <a href={`https://okoasembackend.onrender.com/uploads/${file.filename}`} download={file.originalName}>
                   Download
                 </a>
               </td>
