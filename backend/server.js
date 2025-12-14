@@ -21,7 +21,7 @@ app.use(cors({
 // app.use('/uploads', express.static('uploads')); // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.error('MongoDB Connection Failed:', err));
 
