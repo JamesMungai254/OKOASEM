@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from "jwt-decode";
+import {Link} from 'react-router-dom';
 import '../../styles/Login.css'
 
 
@@ -59,9 +60,9 @@ function Login() {
       <button type="submit" className="btn btn-primary btn-block">
         Login
       </button>
-      <p>Don't have account? <a href="/register">Register</a>
+      <p>Don't have account? <Link to="/register">Register</Link>
       </p>
-      <button><a href="/">Home</a></button>
+      <button><Link to="/">Home</Link></button>
     </form>
   </div>
   );

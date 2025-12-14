@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/Register.css'; // Import custom styles
+import { Link } from 'react-router-dom';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -105,8 +106,8 @@ function Register() {
         <button type="submit" className="btn btn-primary btn-block">
           Register
         </button>
-        <p>Have an account? click<a href="/login">here</a></p>
-        <button><a href="/">Home</a></button>
+        <p>Have an account? click<Link to="/login">here</Link></p>
+        <button><Link to="/">Home</Link></button>
       </form>
       
     </div>
