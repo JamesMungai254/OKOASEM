@@ -31,7 +31,7 @@ function About() {
       <h1>About Us</h1>
       <p>
         OKOASEM is an innovative platform designed to support students in their academic journey by providing access to past exam papers, particularly in Data Science, along with revision materials in PDF format. 
-        Developed by <strong>JiTECH Technologies</strong> in collaboration with <strong>Samuel Khisa</strong>, a seasoned machine learning engineer, OKOASEM is committed to enhancing learning and academic success.
+        , OKOASEM is committed to enhancing learning and academic success.
       </p>
       <p>
         At OKOASEM, our vision is to empower students with comprehensive resources, enabling them to prepare effectively for exams and deepen their understanding of critical concepts. 
