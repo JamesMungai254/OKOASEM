@@ -2,6 +2,7 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Index from './components/Index';
 import About from './components/About';
+import Footer from './components/Footer';
 import Login from './components/Authentication/Login';
 import Register from './components/Authentication/Register';
 import DataScience1 from './components/DataScience/DataScience1';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/footer" element={<Footer />} />
           <Route path="/register" element={<Register />} />
           
             <Route path="/1" element={<DataScience1 />} />

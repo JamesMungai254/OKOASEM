@@ -84,9 +84,7 @@ function Footer() {
                 </a>
               </p>
               <p>
-                <Link className='text-reset' to='/login' >
-                  Login
-                </Link>
+                <Link className='text-reset' to='/login' >Login</Link>
               </p>
               <p>
                 <a href='#!' className='text-reset'>
