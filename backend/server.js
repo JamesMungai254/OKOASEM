@@ -274,8 +274,8 @@ app.get('/api/user', verifyToken, async (req, res) => {
 
     // Check if user has a profileImage and construct the full URL
     const profileImageUrl = user.profileImage 
-      ? `http://localhost:5000${user.profileImage}` // Adjust the path if needed
-      : 'http://localhost:5000/uploads/1729505277232-azure.png'; // Default placeholder image
+      ? `https://okoasembackend.onrender.com${user.profileImage}` // Adjust the path if needed
+      : 'https://okoasembackend.onrender.com/uploads/1729505277232-azure.png'; // Default placeholder image
 
     res.json({
       username: user.username,
