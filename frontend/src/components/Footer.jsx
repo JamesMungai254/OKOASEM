@@ -43,7 +43,7 @@ function Footer() {
                 JiTECH technologies
               </h6>
               <p>
-                We provide a platform for students to access past papers, tech events, private tutors, and meetups and workshops. This will help them to excel in their studies and careers.
+                We provide a platform for students to access past papers, tech events, help in project, and meetups and workshops. This will help them to excel in their studies and careers.
               </p>
             </MDBCol>
 
@@ -61,7 +61,7 @@ function Footer() {
               </p>
               <p>
                 <a href='#!' className='text-reset'>
-                  Private Tutors
+                  Projects
                 </a>
               </p>
               <p>
