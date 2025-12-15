@@ -3,7 +3,6 @@ import axios from 'axios';
 
 
 import '../../styles/UserDashboard.css';
-import Search from './Searchbar';
 import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
 import Footer from '../Footer';
@@ -16,6 +15,8 @@ function UserDashboard() {
   const [userYear, setUserYear] = useState('');
   const [userCourse, setUserCourse] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
   
 
 
@@ -77,17 +78,25 @@ function UserDashboard() {
     localStorage.removeItem('token');
     navigate('/login');
   };
+// Filter before grouping
+  const filteredFiles = files.filter(file =>
+  JSON.stringify(file)
+    .toLowerCase()
+    .includes(searchQuery.toLowerCase())
+);
+
 
   // Group files by year and course
-  const groupedFiles = files.reduce((acc, file) => {
-    if (!acc[file.year]) acc[file.year] = {};
-    if (!acc[file.year][file.course]) acc[file.year][file.course] = [];
-    acc[file.year][file.course].push(file);
-    return acc;
-  }, {});
+  const groupedFiles = filteredFiles.reduce((acc, file) => {
+  if (!acc[file.year]) acc[file.year] = {};
+  if (!acc[file.year][file.course]) acc[file.year][file.course] = [];
+  acc[file.year][file.course].push(file);
+  return acc;
+}, {});
+
 
   return (
-    <Search>
+    <>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">OKOASEM</a>
@@ -132,9 +141,14 @@ function UserDashboard() {
         </button>
       </div>
 
-  
+  <Search
+  query={searchQuery}
+  setQuery={setSearchQuery}
+  placeholder="Search files..."
+/>
 
-<Search/>
+
+
       <div className="files-section">
         <h2>Available Files</h2>
         {Object.entries(groupedFiles).map(([year, courses]) => (
@@ -176,7 +190,7 @@ function UserDashboard() {
 
       <Contact />
       <Footer />
-    </Search>
+    </>
   );
 }
 

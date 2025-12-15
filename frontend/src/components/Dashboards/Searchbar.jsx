@@ -1,25 +1,18 @@
 import React, { useState } from "react";
 import "../../styles/Search.css";
 
-const Search = ({ data = [], placeholder = "Search..." }) => {
-  const [query, setQuery] = useState("");
 
-  const filteredData = data.filter(item =>
-    JSON.stringify(item)
-      .toLowerCase()
-      .includes(query.toLowerCase())
-  );
 
+const Search = ({ query, setQuery, placeholder }) => {
   return (
     <div className="search-container">
       <input
-        type="text"
-        className="search-input"
-        placeholder={placeholder}
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-
+      type="text"
+      className="search-input"
+      placeholder={placeholder}
+      value={query}
+      onChange={(e) => setQuery(e.target.value)}
+    />
       <div className="search-results">
         {filteredData.length > 0 ? (
           filteredData.map((item, index) => (
