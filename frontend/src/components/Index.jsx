@@ -26,13 +26,10 @@ function Index() {
         </li>
         <li className="nav-item dropdown">
           <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Data Science
+            Notes&Exams
           </a>
           <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-            <li><Link className="dropdown-item" to="/login">Year 1</Link></li>
-            <li><Link className="dropdown-item" to="/login">Year 2</Link></li>
-            <li><Link className="dropdown-item" to="/login">Year 3</Link></li>
-            <li><Link className="dropdown-item" to="/login">Year 4</Link></li>
+            <li><Link className="dropdown-item" to="/login">ACCESS</Link></li>
             <li><hr className="dropdown-divider"/></li>
             <li><a className="dropdown-item" href="#faq">FAQs</a></li>
           </ul>
