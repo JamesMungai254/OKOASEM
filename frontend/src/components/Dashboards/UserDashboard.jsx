@@ -6,6 +6,7 @@ import '../../styles/UserDashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
 import Footer from '../Footer';
+import Search from './Searchbar';
 
 
 function UserDashboard() {
