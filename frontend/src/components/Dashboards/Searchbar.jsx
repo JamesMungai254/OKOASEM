@@ -5,8 +5,7 @@ const Search = ({ data = [], placeholder = "Search..." }) => {
   const [query, setQuery] = useState("");
 
   const filteredData = data.filter(item =>
-    Object.values(item)
-      .join(" ")
+    JSON.stringify(item)
       .toLowerCase()
       .includes(query.toLowerCase())
   );
@@ -27,7 +26,10 @@ const Search = ({ data = [], placeholder = "Search..." }) => {
             <div className="search-card" key={index}>
               {Object.entries(item).map(([key, value]) => (
                 <p key={key}>
-                  <strong>{key}:</strong> {value}
+                  <strong>{key}:</strong>{" "}
+                  {typeof value === "object"
+                    ? JSON.stringify(value)
+                    : value}
                 </p>
               ))}
             </div>
