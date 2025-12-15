@@ -1,36 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import "../../styles/Search.css";
-
-
 
 const Search = ({ query, setQuery, placeholder }) => {
   return (
     <div className="search-container">
       <input
-      type="text"
-      className="search-input"
-      placeholder={placeholder}
-      value={query}
-      onChange={(e) => setQuery(e.target.value)}
-    />
-      <div className="search-results">
-        {filteredData.length > 0 ? (
-          filteredData.map((item, index) => (
-            <div className="search-card" key={index}>
-              {Object.entries(item).map(([key, value]) => (
-                <p key={key}>
-                  <strong>{key}:</strong>{" "}
-                  {typeof value === "object"
-                    ? JSON.stringify(value)
-                    : value}
-                </p>
-              ))}
-            </div>
-          ))
-        ) : (
-          <p className="no-results">No results found</p>
-        )}
-      </div>
+        type="text"
+        className="search-input"
+        placeholder={placeholder}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
     </div>
   );
 };
