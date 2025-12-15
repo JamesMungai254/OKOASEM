@@ -37,7 +37,10 @@ function UserDashboard() {
         const filesResponse = await axios.get('https://okoasembackend.onrender.com/api/files', {
           params: { year: data.year, course: data.course },
         });
-        setFiles(filesResponse.data);
+        setFiles(Array.isArray(filesResponse.data)
+  ? filesResponse.data
+  : filesResponse.data.files || []
+);
       } catch (err) {
         console.error('Failed to fetch user info or files:', err);
       }
