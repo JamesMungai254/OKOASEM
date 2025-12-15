@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useState, useMemo } from "react";
+
 import '../../styles/UserDashboard.css';
 import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
@@ -13,6 +15,8 @@ function UserDashboard() {
   const [userYear, setUserYear] = useState('');
   const [userCourse, setUserCourse] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
+
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -113,8 +117,15 @@ function UserDashboard() {
       </nav>
 
       <h2>Welcome, {userName}!</h2>
-      <p>Your Course: {userCourse}</p>
-      <p>Your Year: {userYear}</p>
+      <div className="search-box">
+  <input
+    type="text"
+    placeholder="Search by file name, course or year..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</div>
+
 
       <div className="upload-section">
         <input
