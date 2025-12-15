@@ -1,8 +1,9 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 
 import '../../styles/UserDashboard.css';
+import Search from './Searchbar';
 import { useNavigate } from 'react-router-dom';
 import Contact from '../Contact';
 import Footer from '../Footer';
@@ -15,7 +16,7 @@ function UserDashboard() {
   const [userYear, setUserYear] = useState('');
   const [userCourse, setUserCourse] = useState('');
   const [selectedFile, setSelectedFile] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+  
 
 
   useEffect(() => {
@@ -86,7 +87,7 @@ function UserDashboard() {
   }, {});
 
   return (
-    <>
+    <Search>
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
         <div className="container-fluid">
           <a className="navbar-brand" href="/">OKOASEM</a>
@@ -131,16 +132,9 @@ function UserDashboard() {
         </button>
       </div>
 
-      <div className="search-box">
-  <input
-    type="text"
-    placeholder="Search by file name, course or year..."
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
-</div>
+  
 
-
+<Search/>
       <div className="files-section">
         <h2>Available Files</h2>
         {Object.entries(groupedFiles).map(([year, courses]) => (
@@ -182,7 +176,7 @@ function UserDashboard() {
 
       <Contact />
       <Footer />
-    </>
+    </Search>
   );
 }
 
