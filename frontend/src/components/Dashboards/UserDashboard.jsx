@@ -117,15 +117,8 @@ function UserDashboard() {
       </nav>
 
       <h2>Welcome, {userName}!</h2>
-      <div className="search-box">
-  <input
-    type="text"
-    placeholder="Search by file name, course or year..."
-    value={searchQuery}
-    onChange={(e) => setSearchQuery(e.target.value)}
-  />
-</div>
-
+      <p>Your Course: {userCourse}</p>
+      <p>Your Year: {userYear}</p>
 
       <div className="upload-section">
         <input
@@ -137,6 +130,16 @@ function UserDashboard() {
           Upload Profile Picture
         </button>
       </div>
+
+      <div className="search-box">
+  <input
+    type="text"
+    placeholder="Search by file name, course or year..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</div>
+
 
       <div className="files-section">
         <h2>Available Files</h2>
