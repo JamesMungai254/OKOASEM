@@ -177,7 +177,7 @@ function UserDashboard() {
                         <td>
                           <a
                             href={`https://okoasembackend.onrender.com/uploads/${file.filename}`}
-                            download={file.originalName} 
+                            download={file.originalName} target="_blank"
                           >
                             Download
                           </a>
