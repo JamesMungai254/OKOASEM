@@ -14,7 +14,7 @@ function Index() {
         <div className="container-fluid">
     <a className="navbar-brand" href="#">OKOASEM</a>
     <button className="navbar-toggler bg-white" style={{color:'white'}}  type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span className="navbar-toggler-icon" style={{color:'black'}} ></span>
+      <span className="navbar-toggler-icon" style={{color:'black'}} >☰</span>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
