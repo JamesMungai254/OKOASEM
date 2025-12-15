@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/search.css";
+import "../../styles/Search.css";
 
 const Search = ({ data = [], placeholder = "Search..." }) => {
   const [query, setQuery] = useState("");
