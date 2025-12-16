@@ -29,7 +29,7 @@ function AdminDashboard() {
         const res = await axios.get(
           "https://okoasembackend.onrender.com/api/messages"
         );
-        setMessages(res.data);
+        setMessage(res.data);
       } catch (err) {
         console.error("Failed to fetch messages", err);
       }
