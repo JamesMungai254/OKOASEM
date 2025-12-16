@@ -31,15 +31,26 @@ useEffect(() => {
         "https://okoasembackend.onrender.com/api/messages"
       );
 
-      console.log("API RESPONSE:", res.data); // 👈 IMPORTANT
-      setMessages(res.data.messages); // 👈 FIX
+      console.log("RAW messages response:", res.data);
+      console.log("Is array?", Array.isArray(res.data));
+
+      // 🔥 FORCE array no matter what
+      const data = Array.isArray(res.data)
+        ? res.data
+        : res.data.messages && Array.isArray(res.data.messages)
+        ? res.data.messages
+        : [];
+
+      setMessages(data);
     } catch (err) {
       console.error("Failed to fetch messages", err);
+      setMessages([]); // ⛑️ fail-safe
     }
   };
 
   fetchMessages();
 }, []);
+
 
 
   // Form handlers
@@ -168,6 +179,7 @@ useEffect(() => {
     <td>{new Date(msg.date).toLocaleString()}</td>
   </tr>
 ))}
+
 
   </tbody>
 </table>
