@@ -351,6 +351,33 @@ app.get("/api/messages", async (req, res) => {
   }
 });
 
+//Initiate mpesa payment
+app.post("/api/mpesa/initiate-payment", async (req, res) => {
+  const { phone, fileId } = req.body;
+
+  // create Payment object
+  const payment = new Payment({
+    phone,
+    fileId,
+    amount: 10, // price in KES
+    status: "PENDING"
+  });
+
+  await payment.save();
+
+  // call Safaricom Daraja API to initiate STK Push
+  // return payment._id to frontend to poll later
+  res.json({ status: "PENDING", paymentId: payment._id });
+});
+
+
+//Check payment status
+app.get("/api/mpesa/payment-status/:paymentId", async (req, res) => {
+  const payment = await Payment.findById(req.params.paymentId);
+  res.json({ status: payment.status });
+});
+
+
 
   
 // Protected route

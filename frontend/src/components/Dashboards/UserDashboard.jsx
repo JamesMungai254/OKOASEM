@@ -48,6 +48,52 @@ function UserDashboard() {
 
     fetchUserData();
   }, []);
+  //Handle download mpesa prompt
+
+const handleDownload = async (fileId) => {
+  // Ask for phone number
+  const phone = prompt("Enter your M-PESA phone number (2547XXXXXXXX):");
+  if (!phone) return; // user cancelled
+
+  try {
+    // Initiate payment request to backend
+    const { data } = await axios.post(
+      `https://okoasembackend.onrender.com/api/mpesa/initiate-payment`,
+      { phone, fileId }
+    );
+
+    if (data.status === "PENDING") {
+      alert("STK Push sent to your phone. Please complete the payment.");
+
+      // Optionally poll the backend to check payment status
+      const interval = setInterval(async () => {
+        const statusRes = await axios.get(
+          `https://okoasembackend.onrender.com/api/mpesa/payment-status/${data.paymentId}`
+        );
+
+        if (statusRes.data.status === "SUCCESS") {
+          clearInterval(interval);
+          alert("Payment successful! Download starting...");
+
+          // Trigger download
+          window.open(
+            `https://okoasembackend.onrender.com/api/download/${fileId}`,
+            "_blank"
+          );
+        }
+
+        if (statusRes.data.status === "FAILED") {
+          clearInterval(interval);
+          alert("Payment failed. Download cancelled.");
+        }
+      }, 5000); // poll every 5 seconds
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Payment failed. Try again.");
+  }
+};
+
 
   const handleFileChange = (e) => setSelectedFile(e.target.files[0]);
   const handleUpload = async () => {
