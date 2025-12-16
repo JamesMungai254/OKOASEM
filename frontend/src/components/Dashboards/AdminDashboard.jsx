@@ -8,6 +8,7 @@ function AdminDashboard() {
   const [year, setYear] = useState('');
   const [course, setCourse] = useState('');
   const [message, setMessage] = useState('');
+  const [messages, setMessages] = useState([]);
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   // Fetch uploaded files on mount
@@ -26,10 +27,12 @@ function AdminDashboard() {
 useEffect(() => {
   const fetchMessages = async () => {
     try {
-      const { data } = await axios.get(
+      const res = await axios.get(
         "https://okoasembackend.onrender.com/api/messages"
       );
-      setMessage(data);
+
+      console.log("API RESPONSE:", res.data); // 👈 IMPORTANT
+      setMessages(res.data.messages); // 👈 FIX
     } catch (err) {
       console.error("Failed to fetch messages", err);
     }
@@ -37,6 +40,8 @@ useEffect(() => {
 
   fetchMessages();
 }, []);
+
+
   // Form handlers
   const handleFileChange = (e) => setFile(e.target.files[0]);
   const handleFileNameChange = (e) => setFileName(e.target.value);
@@ -153,16 +158,17 @@ useEffect(() => {
   </thead>
 
   <tbody>
-    {message.map((msg, index) => (
-      <tr key={msg._id}>
-        <td>{index + 1}</td>
-        <td>{msg.name}</td>
-        <td>{msg.email}</td>
-        <td>{msg.phone}</td>
-        <td>{msg.message}</td>
-        <td>{new Date(msg.date).toLocaleString()}</td>
-      </tr>
-    ))}
+    {Array.isArray(messages) && messages.map((msg, index) => (
+  <tr key={msg._id}>
+    <td>{index + 1}</td>
+    <td>{msg.name}</td>
+    <td>{msg.email}</td>
+    <td>{msg.phone}</td>
+    <td>{msg.message}</td>
+    <td>{new Date(msg.date).toLocaleString()}</td>
+  </tr>
+))}
+
   </tbody>
 </table>
 
