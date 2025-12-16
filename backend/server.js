@@ -7,7 +7,14 @@ const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
 
+app.use(cors({
+  origin: 'https://okoasemfrontend.onrender.com',
+  methods: ['GET','POST','PUT','DELETE','OPTIONS'],
+  allowedHeaders: ['Content-Type','Authorization']
+}));
 
+// This will respond to all OPTIONS preflight requests
+app.options('*', cors());
 
 
 
@@ -15,9 +22,7 @@ require('dotenv').config();
 
 const app = express();
 app.use(express.json());
-app.use(cors({
-  origin: 'https://okoasemfrontend.onrender.com'
-}));
+
 // app.use('/uploads', express.static('uploads')); // Serve uploaded files
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 // Connect to MongoDB
@@ -359,7 +364,7 @@ app.post("/api/mpesa/initiate-payment", async (req, res) => {
   const payment = new Payment({
     phone,
     fileId,
-    amount: 10, // price in KES
+    amount: 5, // price in KES
     status: "PENDING"
   });
 
