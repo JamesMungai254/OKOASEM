@@ -175,12 +175,20 @@ function UserDashboard() {
                         <td>{index + 1}</td>
                         <td>{file.originalName}</td>
                         <td>
-                          <a
+                          {/* <a
                             href={`https://okoasembackend.onrender.com/uploads/${file.filename}`}
                             download={file.originalName} target="_blank"
                           >
                             Download
-                          </a>
+                          </a> */}
+                          <a
+                          href={`https://okoasembackend.onrender.com/api/download/${file._id}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          Download File
+                        </a>
+
                         </td>
                       </tr>
                     ))}

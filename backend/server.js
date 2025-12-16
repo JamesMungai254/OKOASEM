@@ -42,7 +42,7 @@ const userSchema = new mongoose.Schema({
   
   role: { type: String, enum: ['user', 'admin'], default: 'user' },
 });
-
+// File schema
 const fileSchema = new mongoose.Schema({
   filename: String,
   originalName: String,
@@ -51,7 +51,7 @@ const fileSchema = new mongoose.Schema({
   uploadedBy: String, // 'admin'
   dateUploaded: { type: Date, default: Date.now },
 });
-
+// Message Schema
 const messageSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -74,6 +74,17 @@ const messageSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+// Mpesa payment Schema
+const paymentSchema = new mongoose.Schema({
+  phone: String,
+  amount: Number,
+  fileId: mongoose.Schema.Types.ObjectId,
+  checkoutRequestID: String,
+  status: { type: String, default: "PENDING" }
+});
+
+
+
 
 
 // Model
@@ -114,6 +125,24 @@ const verifyToken = async (req, res, next) => {
     res.status(403).json({ message: 'Invalid token.' });
   }
 };
+// mpesa callbacks 
+app.post("/mpesa/callback", async (req, res) => {
+  const callback = req.body.Body.stkCallback;
+
+  const payment = await Payment.findOne({
+    checkoutRequestID: callback.CheckoutRequestID
+  });
+
+  if (callback.ResultCode === 0) {
+    payment.status = "SUCCESS";
+    await payment.save();
+  } else {
+    payment.status = "FAILED";
+    await payment.save();
+  }
+
+  res.json({ received: true });
+});
 // Register Route
 app.post('/api/register', async (req, res) => {
   const { username, email, password, role, secretKey } = req.body;
@@ -134,6 +163,9 @@ app.post('/api/register', async (req, res) => {
     res.status(500).json({ message: 'Error registering user.' });
   }
 });
+
+//Mpesa routes
+app.use("/api", require("./routes/mpesaRoutes"));
 
 // contact
 app.post('/api/contact', async (req, res) => {
@@ -227,6 +259,20 @@ app.get('/api/dashboard', (req, res) => {
     }
   });
   
+  //Secure download endpoint mpesa(No direct access)
+  app.get("/api/download/:fileId", async (req, res) => {
+  const payment = await Payment.findOne({
+    fileId: req.params.fileId,
+    status: "SUCCESS"
+  });
+
+  if (!payment) {
+    return res.status(403).json({ message: "Payment required" });
+  }
+
+  const file = await File.findById(req.params.fileId);
+  res.download(`uploads/${file.filename}`, file.originalName);
+});
   
 
 // Route: Users fetch available files

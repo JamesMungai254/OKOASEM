@@ -3,7 +3,7 @@ import axios from 'axios';
 import "../../styles/AdminDashboard.css";
 
 function AdminDashboard() {
-  const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null); 
   const [fileName, setFileName] = useState('');
   const [year, setYear] = useState('');
   const [course, setCourse] = useState('');
@@ -34,17 +34,17 @@ useEffect(() => {
       console.log("RAW messages response:", res.data);
       console.log("Is array?", Array.isArray(res.data));
 
-      // 🔥 FORCE array no matter what
-      const data = Array.isArray(res.data)
-        ? res.data
-        : res.data.messages && Array.isArray(res.data.messages)
-        ? res.data.messages
+      
+      const data = Array.isArray(res.data) // Check if res.data is an array
+        ? res.data // Use res.data directly if it's an array
+        : res.data.messages && Array.isArray(res.data.messages)// Check if res.data.messages is an array
+        ? res.data.messages /
         : [];
 
       setMessages(data);
     } catch (err) {
       console.error("Failed to fetch messages", err);
-      setMessages([]); // ⛑️ fail-safe
+      setMessages([]); 
     }
   };
 
