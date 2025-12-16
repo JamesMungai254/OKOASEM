@@ -227,13 +227,9 @@ const handleDownload = async (fileId) => {
                           >
                             Download
                           </a> */}
-                          <a
-                          href={`https://okoasembackend.onrender.com/api/download/${file._id}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          Download File
-                        </a>
+                          <button onClick={() => handleDownload(file._id)}>
+                            Download File
+                          </button>
 
                         </td>
                       </tr>
