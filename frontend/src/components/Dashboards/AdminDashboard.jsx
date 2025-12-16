@@ -140,21 +140,32 @@ useEffect(() => {
         </tbody>
       </table>
 
-      <table>
-        <tbody>
-  {messages.map((msg, index) => (
-    <tr key={msg._id}>
-      <td>{index + 1}</td>
-      <td>{msg.name}</td>
-      <td>{msg.email}</td>
-      <td>{msg.phone}</td>
-      <td>{msg.message}</td>
-      <td>{new Date(msg.date).toLocaleString()}</td>
+      <table className="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Message</th>
+      <th>Date</th>
     </tr>
-  ))}
-</tbody>
+  </thead>
 
-      </table>
+  <tbody>
+    {message.map((msg, index) => (
+      <tr key={msg._id}>
+        <td>{index + 1}</td>
+        <td>{msg.name}</td>
+        <td>{msg.email}</td>
+        <td>{msg.phone}</td>
+        <td>{msg.message}</td>
+        <td>{new Date(msg.date).toLocaleString()}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
     </div>
   );
 }
