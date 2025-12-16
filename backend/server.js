@@ -287,6 +287,15 @@ app.get('/api/user', verifyToken, async (req, res) => {
   }
 });
 
+app.get("/api/messages", async (req, res) => {
+  try {
+    const messages = await Message.find().sort({ date: -1 });
+    res.json(messages);
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch messages" });
+  }
+});
+
 
   
 // Protected route

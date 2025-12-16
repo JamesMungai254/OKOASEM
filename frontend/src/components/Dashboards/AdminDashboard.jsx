@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import "../../styles/AdminDashboard.css";
 
 function AdminDashboard() {
   const [file, setFile] = useState(null);
@@ -20,6 +21,21 @@ function AdminDashboard() {
       }
     };
     fetchFiles();
+  }, []);
+  //Fetch Messages
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const res = await axios.get(
+          "https://okoasembackend.onrender.com/api/messages"
+        );
+        setMessages(res.data);
+      } catch (err) {
+        console.error("Failed to fetch messages", err);
+      }
+    };
+
+    fetchMessages();
   }, []);
 
   // Form handlers
