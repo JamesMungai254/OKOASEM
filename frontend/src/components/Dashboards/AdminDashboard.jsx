@@ -22,22 +22,21 @@ function AdminDashboard() {
     };
     fetchFiles();
   }, []);
-  //Fetch Messages
-  useEffect(() => {
-    const fetchMessages = async () => {
-      try {
-        const res = await axios.get(
-          "https://okoasembackend.onrender.com/api/messages"
-        );
-        setMessage(res.data);
-      } catch (err) {
-        console.error("Failed to fetch messages", err);
-      }
-    };
+  // Fetch messages
+useEffect(() => {
+  const fetchMessages = async () => {
+    try {
+      const { data } = await axios.get(
+        "https://okoasembackend.onrender.com/api/messages"
+      );
+      setMessage(data);
+    } catch (err) {
+      console.error("Failed to fetch messages", err);
+    }
+  };
 
-    fetchMessages();
-  }, []);
-
+  fetchMessages();
+}, []);
   // Form handlers
   const handleFileChange = (e) => setFile(e.target.files[0]);
   const handleFileNameChange = (e) => setFileName(e.target.value);
@@ -139,6 +138,22 @@ function AdminDashboard() {
             </tr>
           ))}
         </tbody>
+      </table>
+
+      <table>
+        <tbody>
+  {messages.map((msg, index) => (
+    <tr key={msg._id}>
+      <td>{index + 1}</td>
+      <td>{msg.name}</td>
+      <td>{msg.email}</td>
+      <td>{msg.phone}</td>
+      <td>{msg.message}</td>
+      <td>{new Date(msg.date).toLocaleString()}</td>
+    </tr>
+  ))}
+</tbody>
+
       </table>
     </div>
   );
