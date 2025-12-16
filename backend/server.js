@@ -80,7 +80,8 @@ const paymentSchema = new mongoose.Schema({
   amount: Number,
   fileId: mongoose.Schema.Types.ObjectId,
   checkoutRequestID: String,
-  status: { type: String, default: "PENDING" }
+  status: { type: String, default: "PENDING" },
+  expiresAt: Date
 });
 
 
@@ -133,13 +134,18 @@ app.post("/mpesa/callback", async (req, res) => {
     checkoutRequestID: callback.CheckoutRequestID
   });
 
-  if (callback.ResultCode === 0) {
-    payment.status = "SUCCESS";
-    await payment.save();
-  } else {
-    payment.status = "FAILED";
-    await payment.save();
-  }
+ if (callback.ResultCode === 0) {
+  const receipt = callback.CallbackMetadata.Item.find(
+    i => i.Name === "MpesaReceiptNumber"
+  ).Value;
+
+  payment.status = "SUCCESS";
+  payment.mpesaReceipt = receipt;
+  payment.expiresAt = new Date(Date.now() + 10 * 60 * 1000); // expire in 10 minutes
+} else {
+  payment.status = "FAILED";
+}
+await payment.save();
 
   res.json({ received: true });
 });
@@ -260,19 +266,22 @@ app.get('/api/dashboard', (req, res) => {
   });
   
   //Secure download endpoint mpesa(No direct access)
-  app.get("/api/download/:fileId", async (req, res) => {
+ app.get("/api/download/:fileId", async (req, res) => {
   const payment = await Payment.findOne({
     fileId: req.params.fileId,
     status: "SUCCESS"
   });
 
-  if (!payment) {
-    return res.status(403).json({ message: "Payment required" });
+  if (!payment) return res.status(403).json({ message: "Payment required" });
+  
+  if (payment.expiresAt && payment.expiresAt < new Date()) {
+    return res.status(403).json({ message: "Download expired" });
   }
 
   const file = await File.findById(req.params.fileId);
   res.download(`uploads/${file.filename}`, file.originalName);
 });
+
   
 
 // Route: Users fetch available files
