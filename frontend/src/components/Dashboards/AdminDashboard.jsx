@@ -35,12 +35,14 @@ useEffect(() => {
       console.log("Is array?", Array.isArray(res.data));
 
       
-      const data = Array.isArray(res.data) // Check if res.data is an array
+      // Check if res.data is an array, otherwise check res.data.messages
+      const data = Array.isArray(res.data)
         ? res.data // Use res.data directly if it's an array
-        : res.data.messages && Array.isArray(res.data.messages)// Check if res.data.messages is an array
-        ? res.data.messages /
-        : [];
+        : res.data.messages && Array.isArray(res.data.messages)
+        ? res.data.messages 
+        : []; // Default to empty array
 
+      
       setMessages(data);
     } catch (err) {
       console.error("Failed to fetch messages", err);
