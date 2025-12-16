@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const multer = require('multer');
 const path = require('path');
+const app = express();
 
 app.use(cors({
   origin: 'https://okoasemfrontend.onrender.com',
@@ -20,7 +21,7 @@ app.options('*', cors());
 
 require('dotenv').config();
 
-const app = express();
+
 app.use(express.json());
 
 // app.use('/uploads', express.static('uploads')); // Serve uploaded files
