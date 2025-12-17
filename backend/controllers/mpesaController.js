@@ -41,7 +41,7 @@ exports.initiatePayment = async (req, res) => {
       Password: password,
       Timestamp: timestamp,
       TransactionType: "CustomerPayBillOnline",
-      Amount: amount,
+      Amount: 5,
       PartyA: phone,
       PartyB: shortcode,
       PhoneNumber: phone,
