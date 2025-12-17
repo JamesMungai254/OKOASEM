@@ -1,5 +1,8 @@
 const express = require("express");
 const router = express.Router();
+const cors = require("cors");
+const app = express();  
+
 
 // Allow CORS for all methods including preflight
 router.use((req, res, next) => {
@@ -11,6 +14,7 @@ router.use((req, res, next) => {
   }
   next();
 });
+app.options('*', cors());
 
 const {
   initiatePayment,

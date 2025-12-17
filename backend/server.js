@@ -177,7 +177,7 @@ app.post('/api/register', async (req, res) => {
 });
 
 //Mpesa routes
-app.use("/api", require("./routes/mpesaRoutes"));
+app.use("/api/mpesa", require("./routes/mpesaRoutes"));
 
 // contact
 app.post('/api/contact', async (req, res) => {
