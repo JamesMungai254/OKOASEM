@@ -1,22 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const cors = require('cors');
 
-// Enable CORS for this router
-router.use(cors({
-  origin: 'https://okoasemfrontend.onrender.com',
-  methods: ['GET','POST','OPTIONS'],
-  allowedHeaders: ['Content-Type','Authorization']
-}));
+// Allow CORS for all methods including preflight
+router.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://okoasemfrontend.onrender.com");
+  res.header("Access-Control-Allow-Methods", "GET,POST,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200); // respond OK to preflight
+  }
+  next();
+});
 
 const {
   initiatePayment,
   mpesaCallback
 } = require("../controllers/mpesaController");
 
-
-
-router.post("/pay", initiatePayment);
+// Use consistent endpoint name
+router.post("/initiate-payment", initiatePayment);
 router.post("/mpesa/callback", mpesaCallback);
 
 module.exports = router;
