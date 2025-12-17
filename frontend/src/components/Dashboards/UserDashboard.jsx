@@ -58,7 +58,7 @@ const handleDownload = async (fileId) => {
   try {
     // Initiate payment request to backend
     const { data } = await axios.post("https://okoasembackend.onrender.com/api/mpesa/initiate-payment",
-  { phone, amount, fileId },
+  { phone, amount:5 , fileId },
   { headers: { "Content-Type": "application/json" } }
     );
 
