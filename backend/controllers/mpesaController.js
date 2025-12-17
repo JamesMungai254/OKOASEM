@@ -20,16 +20,12 @@ const getAccessToken = async () => {
 exports.initiatePayment = async (req, res) => {
   try {
     const { phone, fileId } = req.body;
-    const amount = 5; // Fixed amount for file download
-
-    if (!phone || !fileId) {
-      return res.status(400).json({ error: "Phone number and fileId are required" });
-    }
+    const amount = 5; // Fixed amount
 
     const token = await getAccessToken();
     const timestamp = moment().format("YYYYMMDDHHmmss");
 
-    const shortcode = process.env.MPESA_SHORTCODE || "174379";
+    const shortcode = "174379";
     const passkey = process.env.MPESA_PASSKEY;
 
     const password = Buffer.from(shortcode + passkey + timestamp).toString("base64");
@@ -44,37 +40,38 @@ exports.initiatePayment = async (req, res) => {
       PartyB: shortcode,
       PhoneNumber: phone,
       CallBackURL: "https://okoasembackend.onrender.com/api/mpesa/callback",
-      AccountReference: fileId,
+      AccountReference: "OKOASEM",
       TransactionDesc: "File download payment"
     };
 
-    const response = await axios.post(
+    const { data } = await axios.post(
       "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest",
       stkRequest,
-      { headers: { Authorization: `Bearer ${token}` } }
+      {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
     );
 
-    // Save pending payment in DB
+    // Save pending payment
     const payment = new Payment({
       phone,
       amount,
       fileId,
-      checkoutRequestID: response.data.CheckoutRequestID,
-      status: "PENDING",
+      checkoutRequestID: data.CheckoutRequestID,
+      status: "PENDING"
     });
     await payment.save();
 
-    res.json({ 
-      success: true, 
-      message: "STK Push sent",
-      checkoutRequestID: response.data.CheckoutRequestID 
-    });
+    res.json({ success: true, message: "STK Push sent", checkoutRequestID: data.CheckoutRequestID });
 
   } catch (err) {
-    console.error("STK Push Error:", err.response?.data || err.message || err);
-    res.status(500).json({ error: "Payment initiation failed", details: err.response?.data || err.message });
+    console.error(err.response?.data || err);
+    res.status(500).json({ error: "Payment initiation failed" });
   }
 };
+
 
 exports.mpesaCallback = async (req, res) => {
   try {
